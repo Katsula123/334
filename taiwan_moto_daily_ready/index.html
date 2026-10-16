@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="台灣汽機車日報：每日整理台灣汽車、機車及交通法規重要新聞，連結新聞原始來源。">
+  <meta name="theme-color" content="#f8f9fb">
+  <title>台灣汽機車日報 | 台灣汽車、機車與交通法規快訊</title>
+  <style>
+    :root{--ink:#18243a;--muted:#687589;--line:#e5e9ef;--red:#df3b36;--bg:#f8f9fb;--white:#fff}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Noto Sans TC","Microsoft JhengHei",sans-serif;line-height:1.65}
+    a{color:inherit;text-decoration:none}
+    button{font:inherit}
+    .wrap{width:min(1150px,calc(100% - 36px));margin:0 auto}
+    .topbar{border-bottom:1px solid var(--line);background:var(--white)}
+    .head-inner{min-height:76px;display:flex;justify-content:space-between;align-items:center;gap:16px}
+    .brand{display:flex;align-items:center;gap:12px;font-size:1.15rem;font-weight:900;letter-spacing:.02em}
+    .brand-logo{display:grid;place-items:center;width:39px;height:39px;border-radius:12px;color:#fff;background:var(--red);font-size:.95rem;letter-spacing:-.07em}
+    .eyebrow{display:block;color:var(--red);font-weight:800;font-size:.77rem;letter-spacing:.15em}
+    .date{font-size:.83rem;color:var(--muted);white-space:nowrap}
+    .masthead{padding:45px 0 26px}
+    .masthead h1{font-size:clamp(2.05rem,4.5vw,3.55rem);line-height:1.22;letter-spacing:-.055em;margin:11px 0 13px}
+    .masthead p{max-width:650px;margin:0;color:var(--muted);font-size:1.01rem}
+    .update-status{display:flex;gap:9px;align-items:center;color:var(--muted);font-size:.83rem;margin-top:20px}
+    .dot{width:8px;height:8px;background:#3fb68b;display:inline-block;border-radius:50%;flex:none}
+    .tabs{display:flex;gap:8px;overflow:auto;padding:9px 0 24px;scrollbar-width:none}
+    .tab{white-space:nowrap;cursor:pointer;background:#fff;border:1px solid var(--line);padding:8px 19px;border-radius:999px;color:#4b586b;font-weight:700;transition:.15s}
+    .tab:hover,.tab.active{background:var(--ink);border-color:var(--ink);color:#fff}
+    .section-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:13px 0 17px}
+    .section-head h2{font-size:1.38rem;letter-spacing:-.03em;margin:0}
+    .count{font-size:.85rem;color:var(--muted)}
+    .hero{display:grid;grid-template-columns:1.08fr 1fr;overflow:hidden;border-radius:18px;border:1px solid var(--line);background:#fff;margin-bottom:36px;box-shadow:0 12px 35px rgba(30,47,70,.04)}
+    .hero .pic{aspect-ratio:1.5;min-height:295px}
+    .hero .body{padding:clamp(22px,4vw,42px);display:flex;flex-direction:column;justify-content:center}
+    .hero h3{font-size:clamp(1.55rem,2.6vw,2.25rem);letter-spacing:-.035em;line-height:1.42;margin:12px 0}
+    .hero .desc{font-size:.95rem}
+    .meta{display:flex;gap:9px;flex-wrap:wrap;align-items:center;color:var(--muted);font-size:.79rem}
+    .pill{background:#fff0ef;color:#c22f2c;border-radius:5px;padding:3px 9px;font-size:.75rem;font-weight:850}
+    .desc{color:var(--muted);margin:10px 0 18px;line-height:1.75;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+    .go{display:inline-flex;align-items:center;gap:7px;color:var(--red);font-weight:800;font-size:.9rem}
+    .hero .go{margin-top:6px}
+    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:21px;padding-bottom:55px}
+    .card{overflow:hidden;min-width:0;background:#fff;border:1px solid var(--line);border-radius:14px;transition:transform .2s,box-shadow .2s;display:flex;flex-direction:column}
+    .card:hover{transform:translateY(-3px);box-shadow:0 14px 32px rgba(30,47,70,.09)}
+    .pic{position:relative;background:#e9edf3;overflow:hidden;aspect-ratio:16/10}
+    .pic img{width:100%;height:100%;display:block;object-fit:cover}
+    .pic-fallback{width:100%;height:100%;display:flex;align-items:center;justify-content:center;gap:13px;flex-direction:column;color:#8b99ad;background:linear-gradient(135deg,#e9edf3,#f7f8fb)}
+    .pic-fallback span{font-weight:800;font-size:.82rem;letter-spacing:.13em}
+    .pic-fallback svg{width:67px;height:67px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+    .card .body{padding:20px;display:flex;flex-direction:column;flex:1}
+    .card h3{font-size:1.16rem;line-height:1.5;letter-spacing:-.025em;margin:12px 0 4px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+    .card .desc{font-size:.86rem;-webkit-line-clamp:2;margin:7px 0 17px}
+    .card .go{margin-top:auto}
+    .notice{border:1px solid var(--line);background:#fff;padding:25px;border-radius:13px;color:var(--muted);margin:10px 0 46px}
+    .notice strong{color:var(--ink)}
+    footer{background:#fff;border-top:1px solid var(--line);padding:28px 0 35px;font-size:.81rem;color:var(--muted)}
+    footer .wrap{display:flex;flex-direction:column;gap:5px}
+    footer p{margin:0}
+    a:focus-visible,button:focus-visible{outline:3px solid #ff8a80;outline-offset:3px}
+    @media(max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{grid-template-columns:1fr 1fr}.hero .pic{min-height:260px}}
+    @media(max-width:650px){.head-inner{min-height:66px}.brand{font-size:1rem}.date{font-size:.72rem}.masthead{padding:30px 0 20px}.hero{grid-template-columns:1fr}.hero .pic{min-height:auto;aspect-ratio:16/9}.hero .body{padding:23px}.hero h3{font-size:1.55rem}.grid{grid-template-columns:1fr;gap:16px}.card .pic{aspect-ratio:16/9}.section-head h2{font-size:1.24rem}}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap head-inner">
+      <a class="brand" href="./" aria-label="台灣汽機車日報首頁"><span class="brand-logo">RD</span><span>台灣汽機車日報</span></a>
+      <span class="date" id="today"></span>
+    </div>
+  </header>
+  <main class="wrap">
+    <section class="masthead" aria-labelledby="page-title">
+      <span class="eyebrow">TAIWAN MOTOR DAILY · 車壇情報</span>
+      <h1 id="page-title">台灣車壇，每日掌握。</h1>
+      <p>精選台灣汽車、機車與交通法規新消息。只整理重點，點一下就能閱讀原始報導。</p>
+      <div class="update-status"><span class="dot"></span><span id="updated">正在讀取最新新聞…</span></div>
+    </section>
+    <nav class="tabs" aria-label="新聞分類">
+      <button class="tab active" type="button" data-cat="全部" aria-pressed="true">全部新聞</button>
+      <button class="tab" type="button" data-cat="汽車" aria-pressed="false">汽車新聞</button>
+      <button class="tab" type="button" data-cat="機車" aria-pressed="false">機車新聞</button>
+      <button class="tab" type="button" data-cat="交通法規" aria-pressed="false">交通法規</button>
+    </nav>
+    <section id="feature" hidden aria-label="焦點新聞">
+      <div class="section-head"><h2>焦點新聞</h2></div>
+      <div id="hero"></div>
+    </section>
+    <section aria-labelledby="list-title">
+      <div class="section-head"><h2 id="list-title">最新報導</h2><span class="count" id="count"></span></div>
+      <div id="news" class="grid" aria-live="polite"></div>
+      <div id="notice" class="notice" hidden></div>
+    </section>
+  </main>
+  <footer><div class="wrap">
+    <p><strong>台灣汽機車日報</strong> · 新聞摘要索引，非新聞原發單位。</p>
+    <p>標題、圖片、摘要及發布日期來自各新聞來源；內容與圖片權利歸原作者或權利人所有。若圖片無法顯示，會使用分類示意圖。</p>
+    <p>交通法規涉及施行日期與適用範圍，請以主管機關正式公告為準。本站的「更新時間」不代表法規生效時間。</p>
+  </div></footer>
+  <script>
+    'use strict';
+    const newsEl = document.getElementById('news');
+    const heroEl = document.getElementById('hero');
+    const noticeEl = document.getElementById('notice');
+    const featureEl = document.getElementById('feature');
+    const tabs = [...document.querySelectorAll('.tab')];
+    let articles = [];
+    let category = '全部';
+    const icons = {
+      '汽車':'<path d="M11 36h42l-5-12H16zM9 36h46v11H9z"/><circle cx="19" cy="48" r="4"/><circle cx="45" cy="48" r="4"/><path d="M19 24h26"/>',
+      '機車':'<circle cx="14" cy="46" r="9"/><circle cx="50" cy="46" r="9"/><path d="M14 46l10-18h12l14 18-17-1-10-12m14-5h10m-27 2h-5"/>',
+      '交通法規':'<rect x="16" y="6" width="32" height="51" rx="5"/><path d="M24 19h16M24 28h16M24 37h10M24 46h9"/>'
+    };
+    function safeUrl(value) {
+      try {const url = new URL(value); return ['https:', 'http:'].includes(url.protocol) ? url.href : '';} catch {return '';}
+    }
+    function node(tag, cls, txt) {
+      const el = document.createElement(tag);
+      if(cls) el.className = cls;
+      if(txt !== undefined) el.textContent = txt;
+      return el;
+    }
+    function picture(item) {
+      const outer = node('div', 'pic');
+      const fallback = () => {
+        outer.replaceChildren();
+        const box = node('div','pic-fallback');
+        const svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
+        svg.setAttribute('viewBox','0 0 64 64');
+        svg.setAttribute('aria-hidden','true');
+        // Icons are fixed, local SVG paths; no news-supplied markup is inserted.
+        svg.innerHTML = icons[item.category] || icons['汽車'];
+        box.append(svg, node('span','',item.category || '車壇新聞'));
+        outer.append(box);
+      };
+      const src = safeUrl(item.image);
+      if (!src) {fallback(); return outer;}
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = item.title + ' 相關新聞圖片';
+      img.loading = 'lazy';
+      img.referrerPolicy = 'no-referrer';
+      img.onerror = fallback;
+      outer.append(img);
+      return outer;
+    }
+    function card(item, big=false) {
+      const href = safeUrl(item.link);
+      if (!href) return null;
+      const a = node('a',big ? 'hero' : 'card');
+      a.href = href;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      a.setAttribute('aria-label', item.title + '，前往' + item.source + '閱讀');
+      const content = node('div','body');
+      const meta = node('div','meta');
+      meta.append(node('span','pill',item.category), node('span','',item.source), node('span','',item.published || '日期未提供'));
+      const title = node('h3','',item.title);
+      const summary = node('p','desc',item.summary || '閱讀原始報導，了解完整新聞內容。');
+      content.append(meta, title, summary, node('span','go','閱讀原文 ↗'));
+      a.append(picture(item), content);
+      return a;
+    }
+    function show() {
+      const visible = articles.filter(x => category === '全部' || x.category === category);
+      document.getElementById('count').textContent = `共 ${visible.length} 則`;
+      featureEl.hidden = !visible.length;
+      heroEl.replaceChildren();
+      newsEl.replaceChildren();
+      noticeEl.hidden = !!visible.length;
+      if (!visible.length) {
+        noticeEl.textContent = articles.length ? '此分類暫時沒有符合條件的新聞，可以先看看其他分類。' : '目前沒有可顯示的新聞。若剛部署網站，請確認 GitHub Actions 的「更新新聞並發布」工作流程已成功執行。';
+        return;
+      }
+      const featured = card(visible[0],true);
+      if (featured) heroEl.append(featured);
+      for (const item of visible.slice(1)) {
+        const c = card(item);
+        if(c) newsEl.append(c);
+      }
+    }
+    tabs.forEach(btn => btn.addEventListener('click',() => {
+      category = btn.dataset.cat;
+      tabs.forEach(t => {const active = t===btn; t.classList.toggle('active',active); t.setAttribute('aria-pressed',String(active));});
+      show();
+    }));
+    document.getElementById('today').textContent = new Intl.DateTimeFormat('zh-TW',{timeZone:'Asia/Taipei',month:'long',day:'numeric',weekday:'long'}).format(new Date());
+    (async function loadNews(){
+      try {
+        const response = await fetch('./news.json?t=' + Date.now(), {cache:'no-store'});
+        if (!response.ok) throw new Error('無法讀取 news.json');
+        const data = await response.json();
+        articles = Array.isArray(data.items) ? data.items.filter(x => x && x.title && x.link && x.category) : [];
+        const time = new Date(data.updated_at);
+        document.getElementById('updated').textContent = Number.isFinite(time.getTime())
+          ? '資料最後更新：' + new Intl.DateTimeFormat('zh-TW',{timeZone:'Asia/Taipei',dateStyle:'medium',timeStyle:'short'}).format(time) + '（台灣時間）'
+          : '新聞來源定期更新';
+        show();
+      } catch (error) {
+        document.getElementById('updated').textContent = '無法讀取最新資料';
+        noticeEl.hidden = false;
+        noticeEl.textContent = '新聞載入失敗。請確認已透過 GitHub Actions 發布網站，並檢查 news.json 是否成功產生。';
+        console.error(error);
+      }
+    })();
+  </script>
+</body>
+</html>
